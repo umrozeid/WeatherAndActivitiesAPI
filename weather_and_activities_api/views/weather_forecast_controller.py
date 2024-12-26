@@ -45,4 +45,4 @@ class WeatherForecastController(ViewSet):
         weather_forecast = WeatherForecastingComponent().get_three_day_forecast(
             location=location.strip()
         )
-        return Response(weather_forecast)
+        return Response({"weather_forecast": weather_forecast})

@@ -27,3 +27,14 @@ class GoogleMapsGeocodingException(APIException):
             self.status_code = status_code
 
         super(GoogleMapsGeocodingException, self).__init__(detail=message, code=self.code)
+
+
+class OpenAIServiceException(APIException):
+    status_code = status.HTTP_424_FAILED_DEPENDENCY
+    default_detail = "OpenAI service has an issue"
+    code = "OPEN_AI_SERVICE_EXCEPTION"
+
+    def __init__(self, message=None):
+        if not message:
+            message = self.default_detail
+        super(OpenAIServiceException, self).__init__(detail=message, code=self.code)

@@ -29,7 +29,7 @@ class WeatherForecastingComponent:
             GeocodingException: If geocoding request fails
             TomorrowWeatherServiceException: If weather forecast request fails
         """
-        latitude, longitude = GoogleMapsService().geocode_location(location)
+        latitude, longitude, _ = GoogleMapsService().geocode_location(location)
 
         forecast_data = TomorrowWeatherService().get_weather_forecast_by_day(
             latitude=latitude,

@@ -129,3 +129,5 @@ TOMORROW_API = "https://api.tomorrow.io"
 TOMORROW_API_KEY = os.environ["TOMORROW_API_KEY"]
 
 GOOGLE_MAPS_API_KEY = os.environ["GOOGLE_MAPS_API_KEY"]
+
+OPEN_AI_API_KEY = os.environ["OPEN_AI_API_KEY"]

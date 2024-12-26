@@ -10,7 +10,7 @@ class GoogleMapsService:
     def __init__(self):
         self.client = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
 
-    def geocode_location(self, location: str) -> Tuple[float, float]:
+    def geocode_location(self, location: str) -> Tuple[float, float, str]:
         """
         Geocode a location string to get its coordinates using Google Maps API.
 
@@ -18,7 +18,7 @@ class GoogleMapsService:
             location: Location string to geocode
 
         Returns:
-            Tuple of (latitude, longitude) coordinates
+            Tuple of (latitude, longitude, formatted_address)
 
         Raises:
             GeocodingException: If geocoding fails
@@ -30,7 +30,8 @@ class GoogleMapsService:
                 raise GoogleMapsGeocodingException(f"Unable to geocode location: {location}")
 
             coordinates = result[0]['geometry']['location']
-            return coordinates['lat'], coordinates['lng']
+            formatted_address = result[0]['formatted_address']
+            return coordinates['lat'], coordinates['lng'], formatted_address
 
         except (ApiError, Timeout, TransportError):
             raise GoogleMapsGeocodingException(f"Geocoding failed for location: {location}")
