@@ -14,10 +14,10 @@ class TomorrowWeatherServiceException(APIException):
         super(TomorrowWeatherServiceException, self).__init__(detail=message, code=self.code)
 
 
-class GeocodingException(APIException):
+class GoogleMapsGeocodingException(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = "Encountered an issue while geocoding"
-    code = "GEOCODING_EXCEPTION"
+    code = "GOOGLE_MAPS_GEOCODING_EXCEPTION"
 
     def __init__(self, message=None, status_code=None):
         if not message:
@@ -26,4 +26,4 @@ class GeocodingException(APIException):
         if status_code:
             self.status_code = status_code
 
-        super(GeocodingException, self).__init__(detail=message, code=self.code)
+        super(GoogleMapsGeocodingException, self).__init__(detail=message, code=self.code)

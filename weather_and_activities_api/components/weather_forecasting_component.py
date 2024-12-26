@@ -1,7 +1,7 @@
 from typing import List, Dict
 from datetime import datetime
 
-from weather_and_activities_api.components.geocoding_component import GeocodingComponent
+from weather_and_activities_api.services.google_maps_service import GoogleMapsService
 from weather_and_activities_api.services.tomorrow_weather_service import TomorrowWeatherService
 
 
@@ -29,7 +29,7 @@ class WeatherForecastingComponent:
             GeocodingException: If geocoding request fails
             TomorrowWeatherServiceException: If weather forecast request fails
         """
-        latitude, longitude = GeocodingComponent().geocode_location(location)
+        latitude, longitude = GoogleMapsService().geocode_location(location)
 
         forecast_data = TomorrowWeatherService().get_weather_forecast_by_day(
             latitude=latitude,
