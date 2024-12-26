@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from rest_framework import status
-from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
 from drf_spectacular.types import OpenApiTypes
 
 from weather_and_activities_api.components.activities_component import ActivitiesComponent
@@ -19,7 +19,21 @@ class ActivitiesSuggestionsController(ViewSet):
                 required=True,
                 description="Location string (e.g., 'San Francisco' or '90001')"
             ),
-        ]
+        ],
+        responses={
+            200: OpenApiResponse(
+                description="Successfully retrieved activity suggestions",
+                response={
+                    "type": "object",
+                    "properties": {
+                        "activities_suggestions": {
+                            "type": "array",
+                            "items": {"type": "string"}
+                        }
+                    }
+                }
+            )
+        }
     )
     def list(self, request):
         """

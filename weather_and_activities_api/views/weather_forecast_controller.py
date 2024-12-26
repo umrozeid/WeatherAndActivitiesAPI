@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from rest_framework import status
-from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
 from drf_spectacular.types import OpenApiTypes
 
 from weather_and_activities_api.components.weather_forecasting_component import WeatherForecastingComponent
@@ -19,7 +19,29 @@ class WeatherForecastController(ViewSet):
                 required=True,
                 description="Location string (e.g., 'San Francisco' or '90001')"
             ),
-        ]
+        ],
+        responses={
+            200: OpenApiResponse(
+                description="Successfully retrieved weather forecast",
+                response={
+                    "type": "object",
+                    "properties": {
+                        "weather_forecast": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "date": {"type": "string", "format": "date"},
+                                    "temperature_avg": {"type": "number"},
+                                    "temperature_min": {"type": "number"},
+                                    "temperature_max": {"type": "number"}
+                                }
+                            }
+                        }
+                    }
+                }
+            )
+        }
     )
     def list(self, request):
         """

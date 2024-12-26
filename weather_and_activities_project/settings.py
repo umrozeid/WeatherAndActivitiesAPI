@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'weather_and_activities_api',
+    'drf_spectacular'
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,22 @@ TOMORROW_API_KEY = os.environ["TOMORROW_API_KEY"]
 GOOGLE_MAPS_API_KEY = os.environ["GOOGLE_MAPS_API_KEY"]
 
 OPEN_AI_API_KEY = os.environ["OPEN_AI_API_KEY"]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Weather and Activities APIs',
+    'DESCRIPTION': 'APIs for getting weather information and activity suggestions based on location',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+        'persistAuthorization': True,
+        'displayOperationId': True,
+    },
+    'COMPONENT_SPLIT_REQUEST': True,
+}
